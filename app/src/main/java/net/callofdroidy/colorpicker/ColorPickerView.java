@@ -56,6 +56,10 @@ public class ColorPickerView extends View {
     private int defaultPaddingInDp = 16; // this is default style padding, usually 16 dp
     private float defaultPaddingInPx;
 
+    public interface OnColorChangedListener{
+        void onColorChanged(String tag, int selectedColor);
+    }
+
     ColorPickerView(Context c, OnColorChangedListener l, int color, int defaultColor, float widthScreen, float heightScreen, float density) {
         super(c);
 
@@ -265,7 +269,6 @@ public class ColorPickerView extends View {
         Log.e("circle coords", currentColorCircleX + "-" + currentColorCircleY);
         canvas.drawCircle(currentColorCircleX, currentColorCircleY, currentColorCircleRadius, mPaint);
 
-
         // Draw a 'confirm' button
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(Color.parseColor("#737373"));
@@ -338,10 +341,9 @@ public class ColorPickerView extends View {
             }
         }
 
-
-        // If the touch event is located in the left button, notify the listener with the current color
+        // If the touch event is located in the button, notify the listener with the current color
         if (x > buttonXOffset && x < buttonXEnd && y > buttonYStart && y < buttonYEnd)
-            mListener.colorChanged("Color Selected", mCurrentColor);
+            mListener.onColorChanged("Color Selected", mCurrentColor);
 
         return true;
     }

@@ -30,9 +30,9 @@ public class ActivityColorPicker extends AppCompatActivity{
         float density = metrics.density;
         Log.e("width & height", config.screenWidthDp * density + "--" + config.screenHeightDp * density);
 
-        View viewColorPicker = new ColorPickerView(this, new OnColorChangedListener(){
+        View viewColorPicker = new ColorPickerView(this, new ColorPickerView.OnColorChangedListener(){
             @Override
-            public void colorChanged(String str,int color) {
+            public void onColorChanged(String str,int color) {
                 ActivityColorPicker.this.findViewById(android.R.id.content).setBackgroundColor(color);
             }
         }, Color.WHITE, Color.WHITE, config.screenWidthDp * density, config.screenHeightDp * density, density);
